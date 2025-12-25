@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+@theme {
+  --color-main: #335cff;
+
+  --color-base: #0f1115;
+  --color-focus: #1a1f2b;
+  --color-surface: #202534;
+  --color-panel: #141821;
+  --color-mark: #3a3f4d;
+  --color-muted: #242b3c;
+  --color-strong: #f3f5f8;
+
+  --font-inter: "Inter", sans-serif;
+  --font-inter-tight: "Inter Tight", sans-serif;
+  --font-lato: "Lato", sans-serif;
+  --font-nunito-sans: "Nunito Sans", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  --font-open-sans: "Open Sans", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+  --font-plus-jakarta-sans: "Plus Jakarta Sans", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+
+  --font-crimson-text: "Crimson Text", serif;
+  --font-libre-baskerville: "Libre Baskerville", serif;
+  --font-lora: "Lora", serif;
+  --font-merriweather: "Merriweather", serif;
+  --font-spectral: "Spectral", serif;
+
+  --font-fira-code: "Fira Code", monospace;
+  --font-ibm-plex-mono: "IBM Plex Mono", monospace;
+  --font-inconsolata: "Inconsolata", monospace;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --font-roboto-mono: "Roboto Mono", monospace;
+
+  --font-noto-emoji: "Noto Emoji", sans-serif;
+}
