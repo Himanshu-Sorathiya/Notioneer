@@ -1,0 +1,49 @@
+import { useState } from "react";
+
+import ActionPanelLayout from "./ActionPanelLayout.tsx";
+import EditorPaneLayout from "./EditorPaneLayout.tsx";
+import NotesListLayout from "./NotesListLayout.tsx";
+import SideBarLayout from "./SideBarLayout.tsx";
+import TopBarLayout from "./TopBarLayout.tsx";
+
+function AppLayout() {
+  const [selectedNote, setSelectedNote] = useState("all");
+  const [selectedTag, setSelectedTag] = useState("");
+  const [searchFilter, setSearchFilter] = useState("");
+
+  return (
+    <div
+      className={
+        "bg-base text-strong font-inter grid h-screen w-screen grid-cols-[4fr_20fr] overflow-hidden"
+      }
+    >
+      <SideBarLayout
+        selectedNote={selectedNote}
+        selectedTag={selectedTag}
+        setSelectedNote={setSelectedNote}
+        setSelectedTag={setSelectedTag}
+      />
+
+      <div
+        className={
+          "grid grid-cols-[5fr_11fr_4fr] grid-rows-[1fr_19fr] overflow-hidden pr-6 pb-4"
+        }
+      >
+        <TopBarLayout
+          selectedNote={selectedNote}
+          selectedTag={selectedTag}
+          searchFilter={searchFilter}
+          setSearchFilter={setSearchFilter}
+        />
+
+        <NotesListLayout />
+
+        <EditorPaneLayout />
+
+        <ActionPanelLayout />
+      </div>
+    </div>
+  );
+}
+
+export default AppLayout;

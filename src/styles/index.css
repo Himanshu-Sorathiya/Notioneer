@@ -4,8 +4,8 @@
   --color-main: #335cff;
 
   --color-base: #0f1115;
-  --color-focus: #1a1f2b;
-  --color-surface: #202534;
+  --color-focus: #22242f;
+  --color-surface: #525866;
   --color-panel: #141821;
   --color-mark: #3a3f4d;
   --color-muted: #242b3c;
@@ -35,4 +35,14 @@
   --font-roboto-mono: "Roboto Mono", monospace;
 
   --font-noto-emoji: "Noto Emoji", sans-serif;
+}
+
+@layer components {
+  .thin-scrollbar {
+    @apply scrollbar-thin scrollbar-thumb-surface scrollbar-track-focus scrollbar-thumb-rounded-full scrollbar-track-rounded-full;
+  }
+}
+
+@plugin "tailwind-scrollbar" {
+  nocompatible: true;
 }
