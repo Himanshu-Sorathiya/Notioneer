@@ -1,17 +1,17 @@
 function TopBarLayout({
-  selectedNote,
+  isSelectedNoteArchived,
   selectedTag,
   searchFilter,
   setSearchFilter,
 }: {
-  selectedNote: string;
+  isSelectedNoteArchived: boolean;
   selectedTag: string;
   searchFilter: string;
   setSearchFilter: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const header = selectedTag
-    ? `${selectedNote === "all" ? "All" : "Archived"} Notes tagged: ${selectedTag}`
-    : selectedNote === "all"
+    ? `${isSelectedNoteArchived === false ? "All" : "Archived"} Notes tagged: ${selectedTag}`
+    : isSelectedNoteArchived === false
       ? "All Notes"
       : "Archived Notes";
 

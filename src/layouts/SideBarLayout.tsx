@@ -1,33 +1,37 @@
-import { notes } from "../constants/data.ts";
+import type { Note } from "../types/types.ts";
 
 import logo from "../assets/logo.svg";
 
 function SideBarLayout({
-  selectedNote,
+  notes,
+  isSelectedNoteArchived,
   selectedTag,
-  setSelectedNote,
+  searchFilter,
+  setIsSelectedNoteArchived,
   setSelectedTag,
+  setSearchFilter,
 }: {
-  selectedNote: string;
+  notes: Note[];
+  isSelectedNoteArchived: boolean;
   selectedTag: string;
-  setSelectedNote: React.Dispatch<React.SetStateAction<string>>;
+  searchFilter: string;
+  setIsSelectedNoteArchived: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTag: React.Dispatch<React.SetStateAction<string>>;
+  setSearchFilter: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const tags = [
     ...new Set(
       notes
-        .filter((note) => note.status === selectedNote)
-        .flatMap((note) => {
-          return note.tags.split(", ");
-        }),
+        .filter((note) => note.isArchived === isSelectedNoteArchived)
+        .flatMap((note) => note.tags),
     ),
   ];
 
-  const getButtonClass = (noteType: string) =>
+  const getButtonClass = (archived: boolean) =>
     `hover:bg-focus cursor-pointer rounded-md px-3 py-2 text-left transition-all duration-150 ${
-      selectedNote === noteType && !selectedTag
+      isSelectedNoteArchived === archived && !selectedTag
         ? "bg-focus text-main"
-        : selectedNote === noteType && selectedTag
+        : isSelectedNoteArchived === archived && selectedTag
           ? "text-main"
           : ""
     }`;
@@ -42,39 +46,52 @@ function SideBarLayout({
 
       <div className="border-b-surface grid grid-rows-2 gap-1 border-b py-2 pr-6">
         <button
-          className={getButtonClass("all")}
+          className={getButtonClass(false)}
           onClick={() => {
-            setSelectedNote("all");
-            setSelectedTag((prev) => {
-              if (selectedNote === "all") return "";
+            if (!isSelectedNoteArchived) {
+              setSelectedTag("");
 
-              return notes.some(
-                (note) =>
-                  note.status === "all" && note.tags.split(", ").includes(prev),
-              )
-                ? prev
-                : "";
-            });
+              setSearchFilter("");
+            } else {
+              setIsSelectedNoteArchived(false);
+
+              const tagsInAllNotes = [
+                ...new Set(
+                  notes.filter((n) => !n.isArchived).flatMap((n) => n.tags),
+                ),
+              ];
+              setSelectedTag((prev) =>
+                tagsInAllNotes.includes(prev) ? prev : "",
+              );
+
+              setSearchFilter(searchFilter);
+            }
           }}
         >
           All Notes
         </button>
 
         <button
-          className={getButtonClass("archived")}
+          className={getButtonClass(true)}
           onClick={() => {
-            setSelectedNote("archived");
-            setSelectedTag((prev) => {
-              if (selectedNote === "archived") return "";
+            if (isSelectedNoteArchived) {
+              setSelectedTag("");
 
-              return notes.some(
-                (note) =>
-                  note.status === "archived" &&
-                  note.tags.split(", ").includes(prev),
-              )
-                ? prev
-                : "";
-            });
+              setSearchFilter("");
+            } else {
+              setIsSelectedNoteArchived(true);
+
+              const tagsInArchived = [
+                ...new Set(
+                  notes.filter((n) => n.isArchived).flatMap((n) => n.tags),
+                ),
+              ];
+              setSelectedTag((prev) =>
+                tagsInArchived.includes(prev) ? prev : "",
+              );
+
+              setSearchFilter(searchFilter);
+            }
           }}
         >
           Archived Notes

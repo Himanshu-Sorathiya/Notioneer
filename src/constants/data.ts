@@ -1,118 +1,95 @@
-const notes = [
+import type { Note } from "../types/types.ts";
+
+const notes: Note[] = [
   {
     id: 1,
-    title: "Quick idea",
-    tags: "notes, personal",
-    note: "This is a short note written quickly.\n\nIt does not say much, but it exists to test very small content blocks.",
-    status: "all",
+    title: "React Performance Optimization",
+    tags: ["Dev", "React"],
+    content:
+      "Key performance optimization techniques:\n\n1. Code Splitting\n- Use React.lazy() for route-based splitting\n- Implement dynamic imports for heavy components\n\n2. Memoization\n- useMemo for expensive calculations\n- useCallback for function props\n- React.memo for component optimization\n\n3. Virtual List Implementation\n- Use react-window for long lists\n- Implement infinite scrolling\n\nTODO: Benchmark current application and identify bottlenecks",
+    lastEdited: "2024-10-29T10:15:00Z",
+    isArchived: false,
   },
   {
     id: 2,
-    title:
-      "Thoughts on building a note taking application with multiple layout constraints",
-    tags: "development, ui, ux, Los Angeles, productivity",
-    note: "Building interfaces is not just about visuals. It is about how the user feels while interacting.\n\nSometimes the smallest spacing issue can completely ruin the experience.",
-    status: "all",
+    title: "Japan Travel Planning",
+    tags: ["Travel", "Personal"],
+    content:
+      "Japan Trip Planning - Spring 2025\n\nItinerary Draft:\nWeek 1: Tokyo\n- Shibuya and Harajuku\n- TeamLab Digital Art Museum\n- Day trip to Mount Fuji\n\nWeek 2: Kyoto & Osaka\n- Traditional temples\n- Cherry blossom viewing\n- Food tour in Osaka\n\nBudget: $3000\nAccommodation: Mix of hotels and traditional ryokans\nJR Pass: 14 days\n\nTODO: Book flights 6 months in advance",
+    lastEdited: "2024-10-28T16:45:00Z",
+    isArchived: false,
   },
   {
     id: 3,
-    title: "Meeting",
-    tags: "work, personal",
-    note: "Meeting notes.\n\nAgenda was discussed.\n\nNo clear outcome.",
-    status: "all",
+    title: "Favorite Pasta Recipes",
+    tags: ["Cooking", "Recipes"],
+    content:
+      "Classic Italian Recipes:\n\n1. Carbonara\n- Eggs, pecorino, guanciale\n- No cream ever!\n- Save pasta water\n\n2. Cacio e Pepe\n- Pecorino Romano\n- Fresh black pepper\n- Technique is crucial\n\n3. Arrabbiata\n- San Marzano tomatoes\n- Fresh garlic\n- Red pepper flakes\n\nNote: Always use high-quality ingredients",
+    lastEdited: "2024-10-27T14:30:00Z",
+    isArchived: false,
   },
   {
     id: 4,
-    title:
-      "Random long title that keeps going without really saying anything useful at all",
-    tags: "random, testing, edge cases, personal",
-    note: "This paragraph is intentionally long to simulate real writing. People often write without caring about structure.\n\nThey jump from one idea to another, sometimes repeating themselves, sometimes forgetting what they were trying to say in the first place.\n\nThis helps test scrolling and layout behavior.",
-    status: "all",
+    title: "TypeScript Migration Guide",
+    tags: ["Dev", "React", "TypeScript"],
+    content:
+      "Project migration steps:\n\n1. Initial Setup\n- Install TypeScript dependencies\n- Configure tsconfig.json\n- Set up build pipeline\n\n2. Migration Strategy\n- Start with newer modules\n- Add type definitions gradually\n- Use 'any' temporarily for complex cases\n\n3. Testing Approach\n- Update test configuration\n- Add type testing\n- Validate build process\n\nDeadline: End of Q4 2024",
+    lastEdited: "2024-10-26T09:20:00Z",
+    isArchived: true,
   },
   {
     id: 5,
-    title: "UI",
-    tags: "design, frontend, colors, typography, spacing, grids, responsiveness",
-    note: "Design systems evolve over time.\n\nAt first, everything feels clean. Later, exceptions pile up and complexity increases.\n\nThis is natural and should be expected.",
-    status: "all",
+    title: "Weekly Workout Plan",
+    tags: ["Fitness", "Health"],
+    content:
+      "Monday: Upper Body\n- Bench Press 4x8\n- Rows 4x10\n- Shoulder Press 3x12\n- Pull-ups 3 sets\n\nWednesday: Lower Body\n- Squats 4x8\n- Romanian Deadlifts 3x10\n- Lunges 3x12 each\n- Calf Raises 4x15\n\nFriday: Full Body\n- Deadlifts 3x5\n- Push-ups 3x12\n- Leg Press 3x12\n- Core Work\n\nCardio: Tuesday/Thursday - 30 min run",
+    lastEdited: "2024-10-25T18:10:00Z",
+    isArchived: false,
   },
   {
     id: 6,
-    title: "Travel plan draft",
-    tags: "travel, Los Angeles, itinerary, budget planning",
-    note: "Day one includes arrival and rest.\n\nDay two is reserved for exploration.\n\nNothing is fixed yet, everything is flexible and subject to change.",
-    status: "all",
+    title: "Gift Ideas",
+    tags: ["Personal", "Shopping"],
+    content:
+      "Birthday and Holiday Gift List:\n\nMom:\n- Cooking class subscription\n- Kindle Paperwhite\n- Spa day package\n\nDad:\n- Golf lessons\n- Wireless earbuds\n- BBQ accessories\n\nSister:\n- Art supplies set\n- Yoga mat kit\n- Coffee subscription\n\nBudget per person: $150-200",
+    lastEdited: "2024-10-20T11:30:15Z",
+    isArchived: true,
   },
   {
     id: 7,
-    title: "ExtremelySmall",
-    tags: "tiny, frontend",
-    note: "Bare minimum note content.\n\nJust enough text to exist.",
-    status: "all",
+    title: "React Component Library",
+    tags: ["Dev", "React"],
+    content:
+      "Custom Component Library Structure:\n\n1. Basic Components\n- Button\n- Input\n- Card\n- Modal\n\n2. Form Components\n- FormField\n- Select\n- Checkbox\n- RadioGroup\n\n3. Layout Components\n- Container\n- Grid\n- Flex\n\nAll components need:\n- TypeScript definitions\n- Unit tests\n- Storybook documentation\n- Accessibility support",
+    lastEdited: "2024-10-15T14:23:45Z",
+    isArchived: true,
   },
   {
     id: 8,
-    title: "Why some notes become much longer than expected",
-    tags: "writing, planning, organization, longform, creativity",
-    note: "Sometimes a note starts as a single sentence.\n\nThen another sentence is added.\n\nBefore you realize it, the note turns into multiple paragraphs explaining context, reasoning, and background.\n\nThis happens often when ideas are unclear at the beginning.",
-    status: "all",
+    title: "Meal Prep Ideas",
+    tags: ["Cooking", "Health", "Recipes"],
+    content:
+      "Weekly Meal Prep Plan:\n\nBreakfast Options:\n- Overnight oats\n- Egg muffins\n- Smoothie packs\n\nLunch Containers:\n- Greek chicken bowl\n- Buddha bowls\n- Tuna pasta salad\n\nSnacks:\n- Cut vegetables\n- Mixed nuts\n- Greek yogurt parfait\n\nPrep Time: Sunday 2-4pm\nStorage: Glass containers\nLasts: 4-5 days",
+    lastEdited: "2024-10-12T09:45:15Z",
+    isArchived: false,
   },
   {
     id: 9,
-    title: "Checklist",
-    tags: "tasks, todo, planning, organization, life, work, personal growth",
-    note: "Wake up early.\n\nFinish pending tasks.\n\nReview goals.\n\nReflect at night.\n\nRepeat.",
-    status: "all",
+    title: "Reading List",
+    tags: ["Personal", "Dev"],
+    content:
+      "Current Reading Queue:\n\n1. Technical Books\n- Clean Architecture by Robert Martin\n- Designing Data-Intensive Applications\n- TypeScript Design Patterns\n\n2. Personal Development\n- Deep Work by Cal Newport\n- Atomic Habits\n- The Psychology of Money\n\nCurrently Reading: Clean Architecture\nNext Up: Deep Work\n\nGoal: One book per month",
+    lastEdited: "2024-10-05T12:20:30Z",
+    isArchived: false,
   },
   {
     id: 10,
-    title: "A medium sized title for average testing",
-    tags: "average, planning, organization,",
-    note: "This note sits somewhere in the middle.\n\nNot too short, not too long.\n\nUseful for testing balanced layouts.",
-    status: "all",
-  },
-  {
-    id: 11,
-    title: "Chaos",
-    tags: "unstructured, experimental",
-    note: "Chaos is not always bad.\n\nSometimes unstructured notes capture raw thoughts better than polished ones.\n\nThey look messy, but they are honest.",
-    status: "all",
-  },
-  {
-    id: 12,
-    title: "Final entry with mixed everything going on inside it",
-    tags: "final, mix, edgecases",
-    note: "This is the first paragraph of the final note.\n\nThe second paragraph is longer and goes into more detail about absolutely nothing in particular, just to simulate heavy content usage inside the editor area.\n\nThe third paragraph exists purely to ensure multiple-paragraph rendering works correctly across different sections of the UI.",
-    status: "all",
-  },
-  {
-    id: 13,
-    title:
-      "Random long title that keeps going without really saying anything useful at all",
-    tags: "random, testing, edge cases, personal",
-    note: "This paragraph is intentionally long to simulate real writing. People often write without caring about structure.\n\nThey jump from one idea to another, sometimes repeating themselves, sometimes forgetting what they were trying to say in the first place.\n\nThis helps test scrolling and layout behavior.",
-    status: "archived",
-  },
-  {
-    id: 14,
-    title: "UI",
-    tags: "design, frontend, colors, typography, spacing, grids, responsiveness",
-    note: "Design systems evolve over time.\n\nAt first, everything feels clean. Later, exceptions pile up and complexity increases.\n\nThis is natural and should be expected.",
-    status: "archived",
-  },
-  {
-    id: 15,
-    title: "Checklist",
-    tags: "tasks, todo, planning, organization, life, work, personal growth",
-    note: "Wake up early.\n\nFinish pending tasks.\n\nReview goals.\n\nReflect at night.\n\nRepeat.",
-    status: "archived",
-  },
-  {
-    id: 16,
-    title: "A medium sized title for average testing",
-    tags: "average, planning, organization,",
-    note: "This note sits somewhere in the middle.\n\nNot too short, not too long.\n\nUseful for testing balanced layouts.",
-    status: "archived",
+    title: "Fitness Goals 2025",
+    tags: ["Fitness", "Health", "Personal"],
+    content:
+      "2025 Fitness Objectives:\n\n1. Strength Goals\n- Bench press: 225 lbs\n- Squat: 315 lbs\n- Deadlift: 405 lbs\n\n2. Cardio Goals\n- Run half marathon\n- 5k under 25 minutes\n\n3. Habits\n- Gym 4x per week\n- Daily 10k steps\n- Sleep 7+ hours\n\nTrack all workouts in Strong app",
+    lastEdited: "2024-09-22T07:30:00Z",
+    isArchived: false,
   },
 ];
 
