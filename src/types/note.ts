@@ -8,3 +8,4 @@ interface Note {
 }
 
 export type { Note };
+

@@ -1,11 +1,13 @@
+import { useSelector } from "react-redux";
+
+import type { RootState } from "../store/store.ts";
+
 import { notes } from "../constants/data.ts";
 
-function EditorPaneLayout({
-  selectedNoteId,
-}: {
-  selectedNoteId: number | null;
-}) {
-  const note = notes.find((note) => note.id === selectedNoteId);
+function EditorPaneLayout() {
+  const selectedNote = useSelector((state: RootState) => state.ui.selectedNote);
+
+  const note = notes.find((note) => note.id === selectedNote);
 
   if (!note)
     return (

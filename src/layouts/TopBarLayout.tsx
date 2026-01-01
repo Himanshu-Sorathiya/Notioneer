@@ -1,17 +1,24 @@
-function TopBarLayout({
-  isSelectedNoteArchived,
-  selectedTag,
-  searchFilter,
-  setSearchFilter,
-}: {
-  isSelectedNoteArchived: boolean;
-  selectedTag: string;
-  searchFilter: string;
-  setSearchFilter: React.Dispatch<React.SetStateAction<string>>;
-}) {
+import { useDispatch, useSelector } from "react-redux";
+
+import { setSearchFilter } from "../store/filterSlice.ts";
+import type { RootState } from "../store/store.ts";
+
+function TopBarLayout() {
+  const isArchivedView = useSelector(
+    (state: RootState) => state.filter.isArchivedView,
+  );
+  const selectedTag = useSelector(
+    (state: RootState) => state.filter.selectedTag,
+  );
+  const searchFilter = useSelector(
+    (state: RootState) => state.filter.searchFilter,
+  );
+
+  const dispatch = useDispatch();
+
   const header = selectedTag
-    ? `${isSelectedNoteArchived === false ? "All" : "Archived"} Notes tagged: ${selectedTag}`
-    : isSelectedNoteArchived === false
+    ? `${isArchivedView === false ? "All" : "Archived"} Notes tagged: ${selectedTag}`
+    : isArchivedView === false
       ? "All Notes"
       : "Archived Notes";
 
@@ -25,7 +32,7 @@ function TopBarLayout({
           placeholder="Search by Title, Tags and Content..."
           className={`bg-base peer focus:border-strong focus:text-strong w-full rounded-md border border-gray-400 py-3 pr-4 pl-12 text-sm text-gray-400 transition-all duration-150 outline-none ${searchFilter ? "text-strong" : ""} `}
           value={searchFilter}
-          onChange={(e) => setSearchFilter(e.target.value)}
+          onChange={(e) => dispatch(setSearchFilter(e.target.value))}
         />
 
         <svg

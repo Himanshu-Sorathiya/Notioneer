@@ -1,37 +1,43 @@
-import type { Note } from "../types/types.ts";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  resetFilters,
+  setArchivedView,
+  setSearchFilter,
+  setSelectedTag,
+} from "../store/filterSlice.ts";
+import type { RootState } from "../store/store.ts";
 
 import logo from "../assets/logo.svg";
 
-function SideBarLayout({
-  notes,
-  isSelectedNoteArchived,
-  selectedTag,
-  searchFilter,
-  setIsSelectedNoteArchived,
-  setSelectedTag,
-  setSearchFilter,
-}: {
-  notes: Note[];
-  isSelectedNoteArchived: boolean;
-  selectedTag: string;
-  searchFilter: string;
-  setIsSelectedNoteArchived: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedTag: React.Dispatch<React.SetStateAction<string>>;
-  setSearchFilter: React.Dispatch<React.SetStateAction<string>>;
-}) {
+function SideBarLayout() {
+  const notes = useSelector((state: RootState) => state.notes.notes);
+
+  const isArchivedView = useSelector(
+    (state: RootState) => state.filter.isArchivedView,
+  );
+  const selectedTag = useSelector(
+    (state: RootState) => state.filter.selectedTag,
+  );
+  const searchFilter = useSelector(
+    (state: RootState) => state.filter.searchFilter,
+  );
+
+  const dispatch = useDispatch();
+
   const tags = [
     ...new Set(
       notes
-        .filter((note) => note.isArchived === isSelectedNoteArchived)
+        .filter((note) => note.isArchived === isArchivedView)
         .flatMap((note) => note.tags),
     ),
   ];
 
   const getButtonClass = (archived: boolean) =>
     `hover:bg-focus cursor-pointer rounded-md px-3 py-2 text-left transition-all duration-150 ${
-      isSelectedNoteArchived === archived && !selectedTag
+      isArchivedView === archived && !selectedTag
         ? "bg-focus text-main"
-        : isSelectedNoteArchived === archived && selectedTag
+        : isArchivedView === archived && selectedTag
           ? "text-main"
           : ""
     }`;
@@ -48,23 +54,23 @@ function SideBarLayout({
         <button
           className={getButtonClass(false)}
           onClick={() => {
-            if (!isSelectedNoteArchived) {
-              setSelectedTag("");
-
-              setSearchFilter("");
+            if (!isArchivedView) {
+              dispatch(resetFilters());
             } else {
-              setIsSelectedNoteArchived(false);
+              dispatch(setArchivedView(false));
 
               const tagsInAllNotes = [
                 ...new Set(
                   notes.filter((n) => !n.isArchived).flatMap((n) => n.tags),
                 ),
               ];
-              setSelectedTag((prev) =>
-                tagsInAllNotes.includes(prev) ? prev : "",
+              dispatch(
+                setSelectedTag(
+                  tagsInAllNotes.includes(selectedTag) ? selectedTag : "",
+                ),
               );
 
-              setSearchFilter(searchFilter);
+              dispatch(setSearchFilter(searchFilter));
             }
           }}
         >
@@ -74,23 +80,23 @@ function SideBarLayout({
         <button
           className={getButtonClass(true)}
           onClick={() => {
-            if (isSelectedNoteArchived) {
-              setSelectedTag("");
-
-              setSearchFilter("");
+            if (isArchivedView) {
+              dispatch(resetFilters());
             } else {
-              setIsSelectedNoteArchived(true);
+              dispatch(setArchivedView(true));
 
               const tagsInArchived = [
                 ...new Set(
                   notes.filter((n) => n.isArchived).flatMap((n) => n.tags),
                 ),
               ];
-              setSelectedTag((prev) =>
-                tagsInArchived.includes(prev) ? prev : "",
+              dispatch(
+                setSelectedTag(
+                  tagsInArchived.includes(selectedTag) ? selectedTag : "",
+                ),
               );
 
-              setSearchFilter(searchFilter);
+              dispatch(setSearchFilter(searchFilter));
             }
           }}
         >
@@ -108,9 +114,9 @@ function SideBarLayout({
               className={`hover:bg-focus cursor-pointer rounded-md px-3 py-2 break-all transition-all duration-150 ${selectedTag === tag ? "bg-focus text-main" : ""}`}
               onClick={() => {
                 if (selectedTag === tag) {
-                  setSelectedTag("");
+                  dispatch(setSelectedTag(""));
                 } else {
-                  setSelectedTag(tag);
+                  dispatch(setSelectedTag(tag));
                 }
               }}
             >
