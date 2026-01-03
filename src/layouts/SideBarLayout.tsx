@@ -8,6 +8,8 @@ import {
 } from "../store/filterSlice.ts";
 import type { RootState } from "../store/store.ts";
 
+import Icon from "../components/Icon.tsx";
+
 import logo from "../assets/logo.svg";
 
 function SideBarLayout() {
@@ -34,7 +36,7 @@ function SideBarLayout() {
   ];
 
   const getButtonClass = (archived: boolean) =>
-    `hover:bg-focus cursor-pointer rounded-md px-3 py-2 text-left transition-all duration-150 ${
+    `${
       isArchivedView === archived && !selectedTag
         ? "bg-focus text-main"
         : isArchivedView === archived && selectedTag
@@ -48,7 +50,7 @@ function SideBarLayout() {
 
       <div className="border-b-surface grid grid-rows-2 gap-1 border-b py-2 pr-6">
         <button
-          className={getButtonClass(false)}
+          className={`hover:bg-focus group text-strong flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 transition-all duration-150 ${getButtonClass(false)}`}
           onClick={() => {
             if (!isArchivedView) {
               dispatch(resetFilters());
@@ -70,11 +72,16 @@ function SideBarLayout() {
             }
           }}
         >
-          All Notes
+          <Icon
+            id="icon-all-notes"
+            className={`group-hover:text-main size-5 transition-all duration-150 ${isArchivedView === false ? "text-main" : ""}`}
+          ></Icon>
+
+          <span>All Notes</span>
         </button>
 
         <button
-          className={getButtonClass(true)}
+          className={`hover:bg-focus group text-strong flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 transition-all duration-150 ${getButtonClass(true)}`}
           onClick={() => {
             if (isArchivedView) {
               dispatch(resetFilters());
@@ -96,7 +103,12 @@ function SideBarLayout() {
             }
           }}
         >
-          Archived Notes
+          <Icon
+            id="icon-archive-notes"
+            className={`group-hover:text-main size-5 transition-all duration-150 ${isArchivedView === true ? "text-main" : ""}`}
+          ></Icon>
+
+          <span>Archived Notes</span>
         </button>
       </div>
 
@@ -107,7 +119,7 @@ function SideBarLayout() {
           {tags.map((tag) => (
             <span
               key={tag}
-              className={`hover:bg-focus cursor-pointer rounded-md px-3 py-2 break-all transition-all duration-150 ${selectedTag === tag ? "bg-focus text-main" : ""}`}
+              className={`hover:bg-focus flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 break-all transition-all duration-150 ${selectedTag === tag ? "bg-focus text-main" : ""}`}
               onClick={() => {
                 if (selectedTag === tag) {
                   dispatch(setSelectedTag(""));
@@ -116,7 +128,9 @@ function SideBarLayout() {
                 }
               }}
             >
-              {tag}
+              <Icon id="icon-tag" className="size-5"></Icon>
+
+              <span>{tag}</span>
             </span>
           ))}
         </div>

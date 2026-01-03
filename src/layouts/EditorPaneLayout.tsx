@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 
 import type { RootState } from "../store/store.ts";
 
+import Icon from "../components/Icon.tsx";
+
 import { notes } from "../constants/data.ts";
 
 function EditorPaneLayout() {
@@ -20,13 +22,21 @@ function EditorPaneLayout() {
         <div className="text-2xl font-bold">{note?.title}</div>
 
         <div className="grid grid-cols-[1fr_4fr] gap-2">
-          <span className="text-gray-300">Tags</span>
+          <div className="flex items-center gap-1.5">
+            <Icon id="icon-tag" className="size-5"></Icon>
+
+            <span className="text-gray-300">Tags</span>
+          </div>
 
           <span className="font-semibold">{note?.tags.join(", ")}</span>
         </div>
 
         <div className="grid grid-cols-[1fr_4fr] gap-2">
-          <span className="text-gray-300">Last Edited</span>
+          <div className="flex items-center gap-1.5">
+            <Icon id="icon-clock" className="size-5"></Icon>
+
+            <span className="text-gray-300">Last Edited</span>
+          </div>
 
           <span className="font-semibold">{note?.lastEdited}</span>
         </div>

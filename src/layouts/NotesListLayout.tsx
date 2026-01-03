@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/store.ts";
 import { setSelectedNote } from "../store/uiSlice.ts";
 
+import Icon from "../components/Icon.tsx";
+
 function NotesListLayout() {
   const notes = useSelector((state: RootState) => state.notes.notes);
 
@@ -79,8 +81,10 @@ function NotesListLayout() {
 
   return (
     <div className="thin-scrollbar flex flex-col gap-1 overflow-y-auto px-3 py-4">
-      <button className="bg-main mb-2 w-full cursor-pointer rounded-lg px-4 py-2 text-center">
-        + Create new Note
+      <button className="bg-main mb-2 flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg px-4 py-2 text-center">
+        <Icon id="icon-plus" className="size-5"></Icon>
+
+        <span>Create new Note</span>
       </button>
 
       {orderedNotes.map((note) => {
