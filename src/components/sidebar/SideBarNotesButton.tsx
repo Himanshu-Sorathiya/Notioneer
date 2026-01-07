@@ -6,6 +6,7 @@ function SideBarNotesButton({
   selectedTag,
   iconId,
   label,
+  disabled,
   onClick,
 }: {
   archive: boolean;
@@ -13,6 +14,7 @@ function SideBarNotesButton({
   selectedTag: string;
   iconId: string;
   label: string;
+  disabled?: boolean;
   onClick: () => void;
 }) {
   const getButtonClass = (archived: boolean) =>
@@ -26,7 +28,8 @@ function SideBarNotesButton({
 
   return (
     <button
-      className={`hover:bg-focus group text-strong flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 transition-all duration-150 ${getButtonClass(archive)}`}
+      className={`hover:bg-focus group text-strong flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 disabled:cursor-not-allowed transition-all duration-150 ${getButtonClass(archive)}`}
+      disabled={disabled}
       onClick={onClick}
     >
       <Icon

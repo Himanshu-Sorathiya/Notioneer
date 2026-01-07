@@ -5,7 +5,7 @@ import { setMode, setSelectedNote } from "../../store/uiSlice.ts";
 
 import type { Note } from "../../types/note.ts";
 
-function NotesListNewNote({ note }: { note: Note }) {
+function NotesListNote({ note }: { note: Note }) {
   const selectedNote = useSelector((state: RootState) => state.ui.selectedNote);
   const mode = useSelector((state: RootState) => state.ui.mode);
 
@@ -40,4 +40,4 @@ function NotesListNewNote({ note }: { note: Note }) {
   );
 }
 
-export default NotesListNewNote;
+export default NotesListNote;

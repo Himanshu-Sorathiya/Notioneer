@@ -5,9 +5,9 @@ import type { RootState } from "../store/store.ts";
 import ReadingPaneContent from "../components/readingpane/ReadingPaneContent.tsx";
 import ReadingPaneHeader from "../components/readingpane/ReadingPaneHeader.tsx";
 
-import { notes } from "../constants/data.ts";
-
 function ReadingPaneLayout() {
+  const notes = useSelector((state: RootState) => state.notes.notes);
+
   const selectedNote = useSelector((state: RootState) => state.ui.selectedNote);
 
   const note = notes.find((note) => note.id === selectedNote);

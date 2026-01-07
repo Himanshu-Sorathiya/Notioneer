@@ -6,7 +6,7 @@ import type { RootState } from "../store/store.ts";
 import { setSelectedNote } from "../store/uiSlice.ts";
 
 import NotesListNewNoteButton from "../components/noteslist/NotesListNewNoteButton.tsx";
-import NotesListNewNote from "../components/noteslist/NotesListNote.tsx";
+import NotesListNote from "../components/noteslist/NotesListNote.tsx";
 
 function NotesListLayout() {
   const notes = useSelector((state: RootState) => state.notes.notes);
@@ -88,7 +88,7 @@ function NotesListLayout() {
       <NotesListNewNoteButton />
 
       {orderedNotes.map((note) => {
-        return <NotesListNewNote key={note.id} note={note} />;
+        return <NotesListNote key={note.id} note={note} />;
       })}
     </div>
   );

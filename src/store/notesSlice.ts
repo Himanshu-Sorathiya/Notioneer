@@ -10,7 +10,10 @@ interface NoteState {
 }
 
 const initialState: NoteState = {
-  notes: notes,
+  notes: [...notes].sort(
+    (a, b) =>
+      new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime(),
+  ),
   currentNote: null,
 };
 
@@ -20,6 +23,11 @@ const notesSlice = createSlice({
   reducers: {
     addNote(state, action) {
       state.notes.push(action.payload);
+
+      state.notes.sort(
+        (a, b) =>
+          new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime(),
+      );
     },
 
     updateNote(state, action) {
@@ -30,6 +38,11 @@ const notesSlice = createSlice({
           return note;
         }
       });
+
+      state.notes.sort(
+        (a, b) =>
+          new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime(),
+      );
     },
 
     deleteNote(state, action) {

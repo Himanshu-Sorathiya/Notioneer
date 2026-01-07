@@ -25,9 +25,13 @@ function SideBarLayout() {
     (state: RootState) => state.filter.searchFilter,
   );
 
+  const mode = useSelector((state: RootState) => state.ui.mode);
+
   const dispatch = useDispatch();
 
   function handleNotesViewChange({ targetView }: { targetView: boolean }) {
+    if (mode === "edit") return;
+
     if (isArchivedView === targetView) {
       dispatch(resetFilters());
     } else {
@@ -68,6 +72,7 @@ function SideBarLayout() {
           selectedTag={selectedTag}
           iconId="icon-archive-notes"
           label="Archived Notes"
+          disabled={mode === "edit"}
           onClick={() => handleNotesViewChange({ targetView: true })}
         />
       </div>

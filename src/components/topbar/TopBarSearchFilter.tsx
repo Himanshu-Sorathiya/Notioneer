@@ -10,6 +10,8 @@ function TopBarSearchFilter() {
     (state: RootState) => state.filter.searchFilter,
   );
 
+  const mode = useSelector((state: RootState) => state.ui.mode);
+
   const dispatch = useDispatch();
 
   return (
@@ -17,14 +19,15 @@ function TopBarSearchFilter() {
       <input
         type="text"
         placeholder="Search by Title, Tags and Content..."
-        className={`bg-base peer focus:border-strong focus:text-strong w-full rounded-md border border-gray-500 py-3 pr-4 pl-12 text-sm text-gray-400 transition-all duration-150 outline-none ${searchFilter ? "text-strong" : ""} `}
+        className={`bg-base peer focus:border-strong focus:text-strong w-full rounded-md border border-gray-500 py-3 pr-4 pl-12 text-sm text-gray-400 transition-all duration-150 outline-none disabled:cursor-not-allowed ${searchFilter ? "text-strong" : ""} `}
         value={searchFilter}
+        disabled={mode === "edit"}
         onChange={(e) => dispatch(setSearchFilter(e.target.value))}
       />
 
       <Icon
         id="icon-search"
-        className={`peer-focus:text-strong absolute top-0 bottom-0 left-3 my-auto h-6 w-6 text-gray-400 ${searchFilter ? "text-strong" : ""}`}
+        className={`peer-focus:text-strong absolute top-0 bottom-0 left-3 my-auto h-6 w-6 text-gray-400 peer-disabled:cursor-not-allowed ${searchFilter ? "text-strong" : ""}`}
       ></Icon>
     </div>
   );
