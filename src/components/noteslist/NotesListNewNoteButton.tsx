@@ -30,12 +30,13 @@ function NotesListNewNoteButton() {
         dispatch(resetFilters());
 
         const newNote: Note = {
-          id: Date.now(),
+          id: `${Date.now()}`,
           title: "",
           tags: [],
           content: "",
-          lastEdited: "",
-          isArchived: false,
+          updated_at: "",
+          created_at: Date.now().toString(),
+          is_archived: false,
         };
         dispatch(setDraftNote(newNote));
         dispatch(setSelectedNote(null));

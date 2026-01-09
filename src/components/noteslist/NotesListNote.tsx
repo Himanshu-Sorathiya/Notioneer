@@ -44,7 +44,7 @@ function NotesListNote({ note }: { note: Note }) {
           ))}
         </p>
 
-        <p className="text-sm">{note.lastEdited}</p>
+        <p className="text-sm">{note.updated_at}</p>
       </div>
     </div>
   );

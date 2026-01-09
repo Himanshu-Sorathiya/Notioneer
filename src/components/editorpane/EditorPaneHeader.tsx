@@ -48,7 +48,7 @@ function EditorPaneHeader() {
         ></input>
       </div>
 
-      {draftNote?.lastEdited && (
+      {draftNote?.updated_at && (
         <div className="grid grid-cols-[1fr_4fr] gap-2">
           <div className="flex items-center gap-1.5">
             <Icon id="icon-clock" className="size-5"></Icon>
@@ -56,7 +56,7 @@ function EditorPaneHeader() {
             <span className="text-gray-300">Last Edited</span>
           </div>
 
-          <span className="font-semibold">{draftNote.lastEdited}</span>
+          <span className="font-semibold">{draftNote.updated_at}</span>
         </div>
       )}
     </div>

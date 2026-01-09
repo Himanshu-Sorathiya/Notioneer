@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface FilterState {
-  isArchivedView: boolean;
+  is_archivedView: boolean;
   selectedTag: string;
   searchFilter: string;
 }
 
 const initialState: FilterState = {
-  isArchivedView: false,
+  is_archivedView: false,
   selectedTag: "",
   searchFilter: "",
 };
@@ -17,7 +17,7 @@ const filterSlice = createSlice({
   initialState,
   reducers: {
     setArchivedView(state, action) {
-      state.isArchivedView = action.payload;
+      state.is_archivedView = action.payload;
     },
 
     setSelectedTag(state, action) {

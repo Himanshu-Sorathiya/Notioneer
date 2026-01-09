@@ -24,7 +24,7 @@ function ReadingPaneHeader({ note }: { note: Note }) {
           <span className="text-gray-300">Last Edited</span>
         </div>
 
-        <span className="font-semibold">{note?.lastEdited}</span>
+        <span className="font-semibold">{note?.updated_at}</span>
       </div>
     </div>
   );

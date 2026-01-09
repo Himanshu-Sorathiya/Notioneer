@@ -13,7 +13,7 @@ interface NoteState {
 const initialState: NoteState = {
   notes: [...notes].sort(
     (a, b) =>
-      new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime(),
+      new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
   ),
   selectedNote: null,
   draftNote: null,
@@ -28,7 +28,7 @@ const notesSlice = createSlice({
 
       state.notes.sort(
         (a, b) =>
-          new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime(),
+          new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
       );
     },
 
@@ -43,7 +43,7 @@ const notesSlice = createSlice({
 
       state.notes.sort(
         (a, b) =>
-          new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime(),
+          new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
       );
     },
 
@@ -54,7 +54,7 @@ const notesSlice = createSlice({
     toggleArchive(state, action) {
       state.notes = state.notes.map((note) => {
         if (note.id === action.payload) {
-          return { ...note, isArchived: !note.isArchived };
+          return { ...note, is_archived: !note.is_archived };
         } else {
           return note;
         }

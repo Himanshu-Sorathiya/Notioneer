@@ -22,12 +22,12 @@ function ActionPanelToggleButton({ note }: { note: Note }) {
       }}
     >
       <Icon
-        id={`${note?.isArchived === false ? "icon-archive-notes" : "icon-unarchive-notes"}`}
+        id={`${note?.is_archived === false ? "icon-archive-notes" : "icon-unarchive-notes"}`}
         className="size-5"
       ></Icon>
 
       <span>
-        {note?.isArchived === false ? "Archive Note" : "Unarchive Note"}
+        {note?.is_archived === false ? "Archive Note" : "Unarchive Note"}
       </span>
     </button>
   );

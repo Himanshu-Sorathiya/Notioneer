@@ -15,8 +15,8 @@ import SideBarTags from "../components/sidebar/SideBarTags.tsx";
 function SideBarLayout() {
   const notes = useSelector((state: RootState) => state.notes.notes);
 
-  const isArchivedView = useSelector(
-    (state: RootState) => state.filter.isArchivedView,
+  const is_archivedView = useSelector(
+    (state: RootState) => state.filter.is_archivedView,
   );
   const selectedTag = useSelector(
     (state: RootState) => state.filter.selectedTag,
@@ -30,7 +30,7 @@ function SideBarLayout() {
   const dispatch = useDispatch();
 
   function handleNotesViewChange({ targetView }: { targetView: boolean }) {
-    if (isArchivedView === targetView) {
+    if (is_archivedView === targetView) {
       dispatch(resetFilters());
     } else {
       if (targetView === true && isDirty === true) return;
@@ -40,7 +40,7 @@ function SideBarLayout() {
       const tagsInNotes = [
         ...new Set(
           notes
-            .filter((n) => (targetView ? n.isArchived : !n.isArchived))
+            .filter((n) => (targetView ? n.is_archived : !n.is_archived))
             .flatMap((n) => n.tags),
         ),
       ];
@@ -59,7 +59,7 @@ function SideBarLayout() {
       <div className="border-b-surface grid grid-rows-2 gap-1 border-b py-2 pr-6">
         <SideBarNotesButton
           archive={false}
-          isArchivedView={isArchivedView}
+          is_archivedView={is_archivedView}
           selectedTag={selectedTag}
           iconId="icon-all-notes"
           label="All Notes"
@@ -68,7 +68,7 @@ function SideBarLayout() {
 
         <SideBarNotesButton
           archive={true}
-          isArchivedView={isArchivedView}
+          is_archivedView={is_archivedView}
           selectedTag={selectedTag}
           disabled={isDirty}
           iconId="icon-archive-notes"

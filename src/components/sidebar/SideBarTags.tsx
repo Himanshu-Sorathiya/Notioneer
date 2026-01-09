@@ -7,8 +7,8 @@ import SideBarTag from "./SideBarTag.tsx";
 function SideBarTags() {
   const notes = useSelector((state: RootState) => state.notes.notes);
 
-  const isArchivedView = useSelector(
-    (state: RootState) => state.filter.isArchivedView,
+  const is_archivedView = useSelector(
+    (state: RootState) => state.filter.is_archivedView,
   );
   const selectedTag = useSelector(
     (state: RootState) => state.filter.selectedTag,
@@ -21,7 +21,7 @@ function SideBarTags() {
   const tags = [
     ...new Set(
       notes
-        .filter((note) => note.isArchived === isArchivedView)
+        .filter((note) => note.is_archived === is_archivedView)
         .flatMap((note) => note.tags),
     ),
   ];

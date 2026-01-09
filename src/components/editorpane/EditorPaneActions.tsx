@@ -36,11 +36,11 @@ function EditorPaneActions() {
         className="bg-main hover:bg-[#2547d0]"
         disabled={!isDirty}
         onClick={() => {
-          if (!selectedNote || !draftNote) return;
+          if (!draftNote) return;
 
           const noteToSave: Note = {
             ...draftNote,
-            lastEdited: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
           };
 
           if (notes.some((n) => n.id === draftNote.id)) {

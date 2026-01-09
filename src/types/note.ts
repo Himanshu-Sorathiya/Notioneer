@@ -1,11 +1,12 @@
 interface Note {
-  id: number;
+  id: string;
+  user_id?: string;
   title: string;
   tags: string[];
   content: string;
-  lastEdited: string;
-  isArchived: boolean;
+  is_archived: boolean;
+  updated_at: string;
+  created_at: string;
 }
 
 export type { Note };
-

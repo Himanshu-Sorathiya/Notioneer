@@ -12,8 +12,8 @@ import NotesListNote from "../components/noteslist/NotesListNote.tsx";
 function NotesListLayout() {
   const notes = useSelector((state: RootState) => state.notes.notes);
 
-  const isArchivedView = useSelector(
-    (state: RootState) => state.filter.isArchivedView,
+  const is_archivedView = useSelector(
+    (state: RootState) => state.filter.is_archivedView,
   );
   const selectedTag = useSelector(
     (state: RootState) => state.filter.selectedTag,
@@ -32,7 +32,7 @@ function NotesListLayout() {
   const dispatch = useDispatch();
 
   const filteredNotes = notes
-    .filter((note) => note.isArchived === isArchivedView)
+    .filter((note) => note.is_archived === is_archivedView)
     .filter(
       (note) =>
         !selectedTag || note.tags.some((tag) => tag.includes(selectedTag)),

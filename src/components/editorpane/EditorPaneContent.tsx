@@ -38,7 +38,7 @@ function EditorPaneContent() {
         dispatch(
           setDraftNote({
             ...draftNote,
-            content: e.currentTarget.textContent || "",
+            content: e.currentTarget.innerText || "",
           }),
         );
 
