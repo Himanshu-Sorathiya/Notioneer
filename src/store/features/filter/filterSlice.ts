@@ -1,7 +1,5 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import type { RootState } from "./store.ts";
-
 interface FilterState {
   isArchivedView: boolean;
   selectedTag: string;
@@ -37,18 +35,6 @@ const filterSlice = createSlice({
   },
 });
 
-const selectIsArchivedView = (state: RootState) => state.filter.isArchivedView;
-const selectSelectedTag = (state: RootState) => state.filter.selectedTag;
-const selectSearchFilter = (state: RootState) => state.filter.searchFilter;
-const selectIsTagSelected = (state: RootState, tag: string) =>
-  tag === state.filter.selectedTag;
-
-export {
-  selectIsArchivedView,
-  selectIsTagSelected,
-  selectSearchFilter,
-  selectSelectedTag,
-};
 export const {
   setArchivedView,
   setSelectedTag,

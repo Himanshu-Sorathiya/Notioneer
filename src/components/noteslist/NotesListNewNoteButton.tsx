@@ -1,11 +1,17 @@
-import { resetFilters, setArchivedView } from "../../store/filterSlice.ts";
-import { setDraftNote, setSelectedNote } from "../../store/notesSlice.ts";
+import {
+  resetFilters,
+  setArchivedView,
+} from "../../store/features/filter/filterSlice.ts";
+import {
+  setDraftNote,
+  setSelectedNote,
+} from "../../store/features/notes/notesSlice.ts";
+import { selectIsDirty } from "../../store/features/ui/uiSelectors.ts";
 import {
   incrementEditorResetKey,
-  selectIsDirty,
   setIsCreatingNewNote,
   setIsDirty,
-} from "../../store/uiSlice.ts";
+} from "../../store/features/ui/uiSlice.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
 

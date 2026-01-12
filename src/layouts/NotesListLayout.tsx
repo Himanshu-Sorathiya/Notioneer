@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import {
   selectFilteredAndOrderedNotes,
   selectSelectedNoteId,
+} from "../store/features/notes/notesSelectors.ts";
+import {
   setDraftNote,
   setSelectedNote,
-} from "../store/notesSlice.ts";
-import {
-  incrementEditorResetKey,
-  selectIsCreatingNewNote,
-} from "../store/uiSlice.ts";
+} from "../store/features/notes/notesSlice.ts";
+import { selectIsCreatingNewNote } from "../store/features/ui/uiSelectors.ts";
+import { incrementEditorResetKey } from "../store/features/ui/uiSlice.ts";
 
 import { useAppDispatch, useAppSelector } from "../hooks/hooks.ts";
 

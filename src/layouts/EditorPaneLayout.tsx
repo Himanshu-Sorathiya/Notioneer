@@ -1,4 +1,4 @@
-import { selectDraftNoteId } from "../store/notesSlice.ts";
+import { selectDraftNoteId } from "../store/features/notes/notesSelectors.ts";
 
 import { useAppSelector } from "../hooks/hooks.ts";
 

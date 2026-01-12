@@ -1,15 +1,15 @@
 import { memo } from "react";
 
+import { selectIsNoteSelected } from "../../store/features/notes/notesSelectors.ts";
 import {
-  selectIsNoteSelected,
   setDraftNote,
   setSelectedNote,
-} from "../../store/notesSlice.ts";
+} from "../../store/features/notes/notesSlice.ts";
 import {
   incrementEditorResetKey,
   setIsCreatingNewNote,
   setIsDirty,
-} from "../../store/uiSlice.ts";
+} from "../../store/features/ui/uiSlice.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
 

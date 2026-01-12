@@ -1,4 +1,4 @@
-import { selectSelectedNote } from "../../store/notesSlice.ts";
+import { selectSelectedNote } from "../../store/features/notes/notesSelectors.ts";
 
 import { useAppSelector } from "../../hooks/hooks.ts";
 

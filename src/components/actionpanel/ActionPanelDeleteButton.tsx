@@ -1,9 +1,12 @@
+import { selectSelectedNoteId } from "../../store/features/notes/notesSelectors.ts";
 import {
   deleteNote,
-  selectSelectedNoteId,
   setSelectedNote,
-} from "../../store/notesSlice.ts";
-import { incrementEditorResetKey, setIsDirty } from "../../store/uiSlice.ts";
+} from "../../store/features/notes/notesSlice.ts";
+import {
+  incrementEditorResetKey,
+  setIsDirty,
+} from "../../store/features/ui/uiSlice.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
 

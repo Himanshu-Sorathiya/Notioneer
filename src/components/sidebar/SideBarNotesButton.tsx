@@ -1,12 +1,14 @@
 import {
-  resetFilters,
   selectIsArchivedView,
   selectSelectedTag,
+} from "../../store/features/filter/filterSelectors.ts";
+import {
+  resetFilters,
   setArchivedView,
   setSelectedTag,
-} from "../../store/filterSlice.ts";
-import { selectTagsByArchiveStatus } from "../../store/notesSlice.ts";
-import { selectIsDirty } from "../../store/uiSlice.ts";
+} from "../../store/features/filter/filterSlice.ts";
+import { selectTagsByArchiveStatus } from "../../store/features/notes/notesSelectors.ts";
+import { selectIsDirty } from "../../store/features/ui/uiSelectors.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
 

@@ -1,5 +1,5 @@
-import { selectIsArchivedView } from "../../store/filterSlice.ts";
-import { selectTagsByArchiveStatus } from "../../store/notesSlice.ts";
+import { selectIsArchivedView } from "../../store/features/filter/filterSelectors.ts";
+import { selectTagsByArchiveStatus } from "../../store/features/notes/notesSelectors.ts";
 
 import { useAppSelector } from "../../hooks/hooks.ts";
 

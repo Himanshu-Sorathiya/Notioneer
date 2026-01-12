@@ -1,11 +1,9 @@
-import {
-  selectSearchFilter,
-  setSearchFilter,
-} from "../../store/filterSlice.ts";
+import { selectSearchFilter } from "../../store/features/filter/filterSelectors.ts";
+import { setSearchFilter } from "../../store/features/filter/filterSlice.ts";
+import { selectIsDirty } from "../../store/features/ui/uiSelectors.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
 
-import { selectIsDirty } from "../../store/uiSlice.ts";
 import Icon from "../Icon.tsx";
 
 function TopBarSearchFilter() {

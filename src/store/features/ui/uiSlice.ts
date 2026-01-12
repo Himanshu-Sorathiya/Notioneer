@@ -1,7 +1,5 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import type { RootState } from "./store.ts";
-
 interface uiState {
   mode: "read" | "edit";
   isCreatingNewNote: boolean;
@@ -44,18 +42,6 @@ const uiSlice = createSlice({
   },
 });
 
-const selectMode = (state: RootState) => state.ui.mode;
-const selectIsCreatingNewNote = (state: RootState) =>
-  state.ui.isCreatingNewNote;
-const selectIsDirty = (state: RootState) => state.ui.isDirty;
-const selectEditorResetKey = (state: RootState) => state.ui.editorResetKey;
-
-export {
-  selectEditorResetKey,
-  selectIsCreatingNewNote,
-  selectIsDirty,
-  selectMode,
-};
 export const {
   setMode,
   setIsCreatingNewNote,

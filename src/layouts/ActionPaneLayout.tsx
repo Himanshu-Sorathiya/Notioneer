@@ -1,8 +1,9 @@
+import { selectSelectedNoteId } from "../store/features/notes/notesSelectors.ts";
+
 import { useAppSelector } from "../hooks/hooks.ts";
 
 import ActionPanelDeleteButton from "../components/actionpanel/ActionPanelDeleteButton.tsx";
 import ActionPanelToggleButton from "../components/actionpanel/ActionPanelToggleButton.tsx";
-import { selectSelectedNoteId } from "../store/notesSlice.ts";
 
 function ActionPanelLayout() {
   const selectedNoteId = useAppSelector(selectSelectedNoteId);

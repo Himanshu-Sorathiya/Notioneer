@@ -3,9 +3,9 @@ import {
   selectDraftNoteTags,
   selectDraftNoteTitle,
   selectDraftNoteUpdatedAt,
-  updateDraftField,
-} from "../../store/notesSlice.ts";
-import { setIsDirty } from "../../store/uiSlice.ts";
+} from "../../store/features/notes/notesSelectors.ts";
+import { updateDraftField } from "../../store/features/notes/notesSlice.ts";
+import { setIsDirty } from "../../store/features/ui/uiSlice.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
 

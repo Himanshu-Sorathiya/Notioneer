@@ -1,7 +1,7 @@
 import {
   selectIsArchivedView,
   selectSelectedTag,
-} from "../../store/filterSlice.ts";
+} from "../../store/features/filter/filterSelectors.ts";
 
 import { useAppSelector } from "../../hooks/hooks.ts";
 

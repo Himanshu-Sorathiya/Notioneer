@@ -1,8 +1,6 @@
-import {
-  selectIsTagSelected,
-  setSelectedTag,
-} from "../../store/filterSlice.ts";
-import { selectIsDirty } from "../../store/uiSlice.ts";
+import { selectIsTagSelected } from "../../store/features/filter/filterSelectors.ts";
+import { setSelectedTag } from "../../store/features/filter/filterSlice.ts";
+import { selectIsDirty } from "../../store/features/ui/uiSelectors.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
 

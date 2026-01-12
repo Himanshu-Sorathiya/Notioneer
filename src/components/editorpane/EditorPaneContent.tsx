@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
 
-import {
-  selectDraftNoteContent,
-  updateDraftField,
-} from "../../store/notesSlice.ts";
-import { selectEditorResetKey, setIsDirty } from "../../store/uiSlice.ts";
+import { selectDraftNoteContent } from "../../store/features/notes/notesSelectors.ts";
+import { updateDraftField } from "../../store/features/notes/notesSlice.ts";
+import { selectEditorResetKey } from "../../store/features/ui/uiSelectors.ts";
+import { setIsDirty } from "../../store/features/ui/uiSlice.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
 

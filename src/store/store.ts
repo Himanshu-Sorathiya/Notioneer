@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import filterReducer from "./filterSlice.ts";
-import notesReducer from "./notesSlice.ts";
-import uiReducer from "./uiSlice.ts";
+import filterReducer from "./features/filter/filterSlice.ts";
+import notesReducer from "./features/notes/notesSlice.ts";
+import uiReducer from "./features/ui/uiSlice.ts";
 
 const store = configureStore({
   reducer: {
