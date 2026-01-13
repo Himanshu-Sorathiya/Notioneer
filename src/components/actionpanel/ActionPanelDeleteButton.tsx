@@ -1,8 +1,7 @@
+import { useDeleteNoteMutation } from "../../store/features/api/apiSlice.ts";
+
 import { selectSelectedNoteId } from "../../store/features/notes/notesSelectors.ts";
-import {
-  deleteNote,
-  setSelectedNote,
-} from "../../store/features/notes/notesSlice.ts";
+import { setSelectedNote } from "../../store/features/notes/notesSlice.ts";
 import {
   incrementEditorResetKey,
   setIsDirty,
@@ -15,6 +14,8 @@ import Icon from "../Icon.tsx";
 function ActionPanelButton() {
   const selectedNoteId = useAppSelector(selectSelectedNoteId);
 
+  const [deleteNote] = useDeleteNoteMutation();
+
   const dispatch = useAppDispatch();
 
   if (!selectedNoteId) return null;
@@ -23,7 +24,7 @@ function ActionPanelButton() {
     <button
       className="hover:text-main flex w-full cursor-pointer items-center gap-2 rounded-lg border border-gray-500 px-4 py-2 text-center text-gray-300 transition-all duration-150"
       onClick={() => {
-        dispatch(deleteNote(selectedNoteId));
+        deleteNote(selectedNoteId);
 
         dispatch(setSelectedNote(null));
 

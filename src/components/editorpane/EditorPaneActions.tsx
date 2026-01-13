@@ -1,12 +1,15 @@
 import {
+  useAddNoteMutation,
+  useUpdateNoteMutation,
+} from "../../store/features/api/apiSlice.ts";
+
+import {
   selectDraftNote,
   selectSelectedNote,
 } from "../../store/features/notes/notesSelectors.ts";
 import {
-  addNote,
   setDraftNote,
   setSelectedNote,
-  updateNote,
 } from "../../store/features/notes/notesSlice.ts";
 import {
   selectIsCreatingNewNote,
@@ -31,6 +34,9 @@ function EditorPaneActions() {
   const isCreatingNewNote = useAppSelector(selectIsCreatingNewNote);
   const isDirty = useAppSelector(selectIsDirty);
 
+  const [addNote] = useAddNoteMutation();
+  const [updateNote] = useUpdateNoteMutation();
+
   const dispatch = useAppDispatch();
 
   const handleSave = () => {
@@ -42,9 +48,9 @@ function EditorPaneActions() {
     };
 
     if (isCreatingNewNote) {
-      dispatch(addNote(noteToSave));
+      addNote(noteToSave);
     } else {
-      dispatch(updateNote(noteToSave));
+      updateNote(noteToSave);
     }
 
     dispatch(setIsCreatingNewNote(false));
