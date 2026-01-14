@@ -39,7 +39,7 @@ function EditorPaneActions() {
 
   const dispatch = useAppDispatch();
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!draftNote) return;
 
     const noteToSave: Note = {
@@ -47,19 +47,24 @@ function EditorPaneActions() {
       updated_at: new Date().toISOString(),
     };
 
-    if (isCreatingNewNote) {
-      addNote(noteToSave);
-    } else {
-      updateNote(noteToSave);
-    }
+    try {
+      let savedNote: Note;
 
-    dispatch(setIsCreatingNewNote(false));
-    dispatch(setIsDirty(false));
+      if (isCreatingNewNote) {
+        savedNote = await addNote(noteToSave).unwrap();
+      } else {
+        await updateNote(noteToSave).unwrap();
+        savedNote = noteToSave;
+      }
 
-    dispatch(setSelectedNote(noteToSave));
-    dispatch(setDraftNote(noteToSave));
+      dispatch(setIsCreatingNewNote(false));
+      dispatch(setIsDirty(false));
 
-    dispatch(incrementEditorResetKey());
+      dispatch(setSelectedNote(savedNote));
+      dispatch(setDraftNote(savedNote));
+
+      dispatch(incrementEditorResetKey());
+    } catch (error) {}
   };
 
   const handleCancel = () => {

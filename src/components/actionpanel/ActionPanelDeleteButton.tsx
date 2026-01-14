@@ -1,7 +1,10 @@
 import { useDeleteNoteMutation } from "../../store/features/api/apiSlice.ts";
 
 import { selectSelectedNoteId } from "../../store/features/notes/notesSelectors.ts";
-import { setSelectedNote } from "../../store/features/notes/notesSlice.ts";
+import {
+  setDraftNote,
+  setSelectedNote,
+} from "../../store/features/notes/notesSlice.ts";
 import {
   incrementEditorResetKey,
   setIsDirty,
@@ -18,20 +21,25 @@ function ActionPanelButton() {
 
   const dispatch = useAppDispatch();
 
+  const handleDelete = async () => {
+    if (!selectedNoteId) return;
+
+    await deleteNote(selectedNoteId).unwrap();
+
+    dispatch(setSelectedNote(null));
+    dispatch(setDraftNote(null));
+
+    dispatch(setIsDirty(false));
+
+    dispatch(incrementEditorResetKey());
+  };
+
   if (!selectedNoteId) return null;
 
   return (
     <button
       className="hover:text-main flex w-full cursor-pointer items-center gap-2 rounded-lg border border-gray-500 px-4 py-2 text-center text-gray-300 transition-all duration-150"
-      onClick={() => {
-        deleteNote(selectedNoteId);
-
-        dispatch(setSelectedNote(null));
-
-        dispatch(setIsDirty(false));
-
-        dispatch(incrementEditorResetKey());
-      }}
+      onClick={handleDelete}
     >
       <Icon id="icon-trash" className="size-5"></Icon>
 

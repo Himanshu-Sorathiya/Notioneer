@@ -18,7 +18,7 @@ function EditorPaneContent() {
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.textContent = draftNoteContent;
+      ref.current.innerText = draftNoteContent;
     }
   }, [editorResetKey]);
 

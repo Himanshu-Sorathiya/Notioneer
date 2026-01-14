@@ -1,3 +1,4 @@
+import { selectTagsByArchiveStatus } from "../../store/features/api/apiSelector.ts";
 import { useGetNotesQuery } from "../../store/features/api/apiSlice.ts";
 
 import { selectIsArchivedView } from "../../store/features/filter/filterSelectors.ts";
@@ -10,14 +11,10 @@ import SidebarTagSkeleton from "./SidebarTagSkeleton.tsx";
 function SideBarTags() {
   const isArchivedView = useAppSelector(selectIsArchivedView);
 
-  const { data: notes = [], isLoading } = useGetNotesQuery();
+  const { isLoading } = useGetNotesQuery();
 
-  const tagsByArchiveStatus = Array.from(
-    new Set(
-      notes
-        .filter((note) => note.is_archived === isArchivedView)
-        .flatMap((note) => note.tags),
-    ),
+  const tagsByArchiveStatus = useAppSelector((state) =>
+    selectTagsByArchiveStatus(state, isArchivedView),
   );
 
   return (

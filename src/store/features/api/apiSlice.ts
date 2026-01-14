@@ -11,7 +11,10 @@ const apiSlice = createApi({
     getNotes: builder.query<Note[], void>({
       providesTags: ["Notes"],
       queryFn: async () => {
-        const { data, error } = await supabase.from("notes").select("*");
+        const { data, error } = await supabase
+          .from("notes")
+          .select("id, title, tags, content, is_archived, updated_at")
+          .order("updated_at", { ascending: false });
 
         if (error) return { error: error as any };
 
@@ -19,12 +22,14 @@ const apiSlice = createApi({
       },
     }),
 
-    addNote: builder.mutation<Note, Omit<Note, "id" | "user_id">>({
+    addNote: builder.mutation<Note, Note>({
       invalidatesTags: ["Notes"],
       queryFn: async (newNote) => {
+        const { id, ...noteWithoutId } = newNote;
+
         const { data, error } = await supabase
           .from("notes")
-          .insert(newNote)
+          .insert(noteWithoutId)
           .select()
           .single();
 
@@ -37,14 +42,20 @@ const apiSlice = createApi({
     updateNote: builder.mutation<Note, Note>({
       invalidatesTags: ["Notes"],
       queryFn: async (updatedNote) => {
+        const noteWithTimestamp = {
+          ...updatedNote,
+          updated_at: new Date().toISOString(),
+        };
+
         const { data, error } = await supabase
           .from("notes")
-          .update(updatedNote)
+          .update(noteWithTimestamp)
           .eq("id", updatedNote.id)
           .select()
           .single();
 
         if (error) return { error: error as any };
+
         return { data: data as Note };
       },
     }),
@@ -55,6 +66,7 @@ const apiSlice = createApi({
         const { error } = await supabase.from("notes").delete().eq("id", id);
 
         if (error) return { error: error as any };
+
         return { data: undefined };
       },
     }),

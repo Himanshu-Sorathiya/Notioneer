@@ -5,6 +5,7 @@ import {
   selectDraftNoteUpdatedAt,
 } from "../../store/features/notes/notesSelectors.ts";
 import { updateDraftField } from "../../store/features/notes/notesSlice.ts";
+import { selectIsCreatingNewNote } from "../../store/features/ui/uiSelectors.ts";
 import { setIsDirty } from "../../store/features/ui/uiSlice.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
@@ -13,10 +14,11 @@ import Icon from "../Icon.tsx";
 
 function EditorPaneHeader() {
   const draftNoteId = useAppSelector(selectDraftNoteId);
-
   const draftNoteTitle = useAppSelector(selectDraftNoteTitle);
   const draftNoteTags = useAppSelector(selectDraftNoteTags);
   const draftNoteUpdatedAt = useAppSelector(selectDraftNoteUpdatedAt);
+
+  const isCreatingNewNote = useAppSelector(selectIsCreatingNewNote);
 
   const dispatch = useAppDispatch();
 
@@ -61,7 +63,7 @@ function EditorPaneHeader() {
         ></input>
       </div>
 
-      {draftNoteUpdatedAt && (
+      {!isCreatingNewNote && (
         <div className="grid grid-cols-[1fr_4fr] gap-2">
           <div className="flex items-center gap-1.5">
             <Icon id="icon-clock" className="size-5"></Icon>
