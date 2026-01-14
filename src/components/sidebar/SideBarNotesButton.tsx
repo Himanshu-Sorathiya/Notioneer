@@ -1,3 +1,5 @@
+import { useGetNotesQuery } from "../../store/features/api/apiSlice.ts";
+
 import {
   selectIsArchivedView,
   selectSelectedTag,
@@ -7,7 +9,6 @@ import {
   setArchivedView,
   setSelectedTag,
 } from "../../store/features/filter/filterSlice.ts";
-import { selectTagsByArchiveStatus } from "../../store/features/notes/notesSelectors.ts";
 import { selectIsDirty } from "../../store/features/ui/uiSelectors.ts";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
@@ -23,12 +24,18 @@ function SideBarNotesButton({
   iconId: string;
   label: string;
 }) {
+  const { data: notes = [] } = useGetNotesQuery();
+
   const isArchivedView = useAppSelector(selectIsArchivedView);
   const selectedTag = useAppSelector(selectSelectedTag);
   const isDirty = useAppSelector(selectIsDirty);
 
-  const targetViewTags = useAppSelector((state) =>
-    selectTagsByArchiveStatus(state, archive),
+  const targetViewTags = Array.from(
+    new Set(
+      notes
+        .filter((note) => note.is_archived === archive)
+        .flatMap((note) => note.tags),
+    ),
   );
 
   const dispatch = useAppDispatch();

@@ -6,10 +6,10 @@ import type { Note } from "../../../types/note.ts";
 
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "/" }),
-  tagTypes: ["Note"],
+  tagTypes: ["Notes"],
   endpoints: (builder) => ({
     getNotes: builder.query<Note[], void>({
-      providesTags: ["Note"],
+      providesTags: ["Notes"],
       queryFn: async () => {
         const { data, error } = await supabase.from("notes").select("*");
 
@@ -20,7 +20,7 @@ const apiSlice = createApi({
     }),
 
     addNote: builder.mutation<Note, Omit<Note, "id" | "user_id">>({
-      invalidatesTags: ["Note"],
+      invalidatesTags: ["Notes"],
       queryFn: async (newNote) => {
         const { data, error } = await supabase
           .from("notes")
@@ -35,7 +35,7 @@ const apiSlice = createApi({
     }),
 
     updateNote: builder.mutation<Note, Note>({
-      invalidatesTags: ["Note"],
+      invalidatesTags: ["Notes"],
       queryFn: async (updatedNote) => {
         const { data, error } = await supabase
           .from("notes")
@@ -50,7 +50,7 @@ const apiSlice = createApi({
     }),
 
     deleteNote: builder.mutation<void, string>({
-      invalidatesTags: ["Note"],
+      invalidatesTags: ["Notes"],
       queryFn: async (id) => {
         const { error } = await supabase.from("notes").delete().eq("id", id);
 

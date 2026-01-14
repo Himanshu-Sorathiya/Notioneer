@@ -19,6 +19,8 @@ import { useAppDispatch, useAppSelector } from "../hooks/hooks.ts";
 
 import NotesListNewNoteButton from "../components/noteslist/NotesListNewNoteButton.tsx";
 import NotesListNote from "../components/noteslist/NotesListNote.tsx";
+import NotesListNoteSkeleton from "../components/noteslist/NotesListNoteSkeleton.tsx";
+
 import type { Note } from "../types/note.ts";
 
 const sortByDate = (a: Note, b: Note) =>
@@ -70,6 +72,8 @@ function NotesListLayout() {
 
   const isCreatingNewNote = useAppSelector(selectIsCreatingNewNote);
 
+  const { isLoading } = useGetNotesQuery();
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -97,12 +101,14 @@ function NotesListLayout() {
   }, [orderedNotes.length, selectedNoteId, isCreatingNewNote, dispatch]);
 
   return (
-    <div className="thin-scrollbar flex flex-col gap-1 overflow-y-auto px-3 py-4">
+    <div className="thin-scrollbar flex flex-col gap-1 overflow-y-auto px-3 py-4 [scrollbar-gutter:stable]">
       <NotesListNewNoteButton />
 
-      {orderedNotes.map((note) => {
-        return <NotesListNote key={note.id} note={note} />;
-      })}
+      {isLoading
+        ? [...Array(5)].map((_, i) => <NotesListNoteSkeleton key={i} />)
+        : orderedNotes.map((note) => (
+            <NotesListNote key={note.id} note={note} />
+          ))}
     </div>
   );
 }
